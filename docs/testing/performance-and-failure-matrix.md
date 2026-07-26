@@ -20,10 +20,28 @@ coverage >= 98%, gzip <= 10 MiB, full import p95 <= 5,000 ms, warm start p95
 separate product decision; CI must not compensate by changing data or silently
 widening a limit.
 
-The committed report is a CI-host proxy, not evidence from the minimum Android
-device. Before release, rerun on Android 10 hardware with 2 GB RAM and record
-model, SoC, storage state, build mode, OS patch, and thermal state in a new
-immutable report.
+## Reproducible Android minimum-tier gate
+
+The automated minimum tier is fixed as Android 10/API 29, two emulator cores,
+2 GB RAM and x86_64. Start that AVD, then run from the repository root:
+
+```powershell
+.\scripts\run-android10-performance.ps1 `
+  -DeviceId emulator-5554 `
+  -FlutterCommand flutter
+```
+
+The runner rejects the wrong API, memory outside the 2 GB tier, a non-Android
+Dart runtime, missing report output, or any gate violation. It saves JSON,
+Markdown and the full test transcript under `performance/reports/`. The
+integration test asserts `Platform.isAndroid`, so a desktop `flutter test -d`
+run cannot masquerade as device evidence.
+
+`.github/workflows/android-minimum-tier.yml` recreates the same API 29,
+two-core, 2048 MB AVD without Google or Firebase keys and publishes the three
+reports as an artifact. A physical low-end-device pass remains useful release
+confidence and is part of the owner journey, but is not substituted for this
+fixed, reproducible regression baseline.
 
 ## Failure matrix
 
@@ -38,7 +56,7 @@ immutable report.
 | Rollback after bad update | `app/test/catalog_rollback_test.dart` | Prior snapshot restored |
 | Duplicate surge | publication contract and >2% approval tests | Block or explicit human approval |
 | Dense map input | `app/test/map_clustering_test.dart` | Bounded deterministic marker output |
-| Disk full / SQLite I/O failure | Physical-device fault injection | Verified catalog is not deleted |
+| Disk full / SQLite I/O failure | `app/test/catalog_artifact_contract_test.dart` injects SQLite `database or disk is full` during replacement | Batch rollback retains the verified catalog; physical fault injection remains an owner smoke check |
 
 Disk-full remains a device-level release check because desktop and in-memory
 SQLite do not faithfully emulate Android filesystem allocation failure.

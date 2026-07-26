@@ -1,12 +1,22 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use(::load)
+    }
+}
+
 fun injectedValue(name: String): String? =
     providers.gradleProperty(name).orNull
         ?: System.getenv(name)?.takeIf { it.isNotBlank() }
+        ?: localProperties.getProperty(name)?.takeIf { it.isNotBlank() }
 
 val uploadKeystorePath = injectedValue("ATM_UPLOAD_KEYSTORE")
 val uploadKeyAlias = injectedValue("ATM_UPLOAD_KEY_ALIAS")

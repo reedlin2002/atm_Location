@@ -4,7 +4,7 @@
   "environment": {
     "operatingSystem": "windows \"Windows 11 家用版\" 10.0 (Build 26200)",
     "runtime": "3.12.2 (stable) (Tue Jun 9 01:11:39 2026 -0700) on \"windows_x64\"",
-    "deviceProfile": "ci-host-proxy; Android 10 / 2 GB physical-device rerun required"
+    "deviceProfile": "ci-host-proxy; Android 10 / 2 GB device integration rerun required"
   },
   "dataQuality": {
     "recordCount": 25000,
@@ -18,31 +18,31 @@
   "timings": {
     "firstImport": {
       "sampleCount": 3,
-      "p50Milliseconds": 1872.884,
-      "p95Milliseconds": 2528.55,
-      "minimumMilliseconds": 1560.207,
-      "maximumMilliseconds": 2528.55
+      "p50Milliseconds": 1547.587,
+      "p95Milliseconds": 1972.391,
+      "minimumMilliseconds": 1184.522,
+      "maximumMilliseconds": 1972.391
     },
     "warmStart": {
       "sampleCount": 30,
-      "p50Milliseconds": 0.493,
-      "p95Milliseconds": 0.712,
-      "minimumMilliseconds": 0.291,
-      "maximumMilliseconds": 12.708
+      "p50Milliseconds": 0.3,
+      "p95Milliseconds": 0.447,
+      "minimumMilliseconds": 0.282,
+      "maximumMilliseconds": 8.909
     },
     "nearbyQuery": {
       "sampleCount": 60,
-      "p50Milliseconds": 2.545,
-      "p95Milliseconds": 4.376,
-      "minimumMilliseconds": 1.365,
-      "maximumMilliseconds": 13.484
+      "p50Milliseconds": 1.807,
+      "p95Milliseconds": 3.755,
+      "minimumMilliseconds": 1.145,
+      "maximumMilliseconds": 11.597
     },
     "textSearch": {
       "sampleCount": 30,
-      "p50Milliseconds": 37.3,
-      "p95Milliseconds": 42.212,
-      "minimumMilliseconds": 30.527,
-      "maximumMilliseconds": 42.562
+      "p50Milliseconds": 24.417,
+      "p95Milliseconds": 26.885,
+      "minimumMilliseconds": 22.729,
+      "maximumMilliseconds": 30.451
     }
   },
   "thresholds": {

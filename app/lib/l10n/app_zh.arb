@@ -212,14 +212,12 @@
   "reviewOnboarding": "重新查看使用與權限說明",
   "settingsFeedback": "提供意見回饋",
   "resetAllLocalData": "重設所有本機資料",
-  "resetAllDescription": "這會清除偏好、最近搜尋、收藏、同意狀態與已安裝 ATM 資料。",
+  "resetAllDescription": "這會清除偏好、最近搜尋、收藏與已安裝 ATM 資料。",
   "resetDialogTitle": "確定要重設所有資料？",
   "resetDialogBody": "此操作無法復原。下次將重新安裝隨附資料並顯示首次使用說明。",
   "cancel": "取消",
   "confirmReset": "確認重設",
   "resetComplete": "本機資料已重設",
-  "diagnosticsTitle": "自願提供當機診斷",
-  "diagnosticsBody": "預設關閉。開啟後只傳送錯誤類型、堆疊與低敏感度版本資訊；不傳位置、搜尋、最近地點、收藏、ATM 選取或廣告識別碼。",
   "atmResultSemantics": "ATM 結果，{institution}，{place}，{address}，距離 {distance}",
   "@atmResultSemantics": {
     "placeholders": {

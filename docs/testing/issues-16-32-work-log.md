@@ -20,21 +20,20 @@
 | 27 | 設定重啟保存、清除篩選與重設資料差異測試先失敗 | 暫存 SQLite 驗證保存、刪除、取消及重設交易 | 預設值與 reset transaction 集中於 manager |
 | 28 | 未同意時 provider 仍可能被呼叫的測試先失敗 | 預設關閉、同意 allowlist、撤回、重設及 provider failure 通過 | consent gate 與資料清洗集中於 diagnostics boundary |
 | 30 | semantics、200% 字級與多尺寸測試先失敗 | 清單式 TalkBack 核心旅程、響應式版面與明暗主題通過 | 共用 semantics、間距、字體與 breakpoints |
-| 31 | 缺少正式規模資料與品質報告時 gate test 先失敗 | 品質、體積、匯入、warm start、查詢與 CI gates 通過 | fixture、計時與報告格式共用 |
+| 31 | 缺少正式規模資料與品質報告時 gate test 先失敗；一般 `flutter test -d` 被證明仍是 Windows runtime | Android integration runner 驗證 API 29／2 GB、品質、體積、匯入、warm start 與查詢 gates；SQLite disk-full proxy 保留舊 catalog | fixture、計時與報告格式抽成 App/host/device 共用 benchmark |
 | 32 | 缺少 release 組態、政策文件與 artifacts 時 readiness test 先失敗 | 可驗證的 release facts、工作流程、政策與商店素材規格通過 | 版本、metadata 與政策事實集中於 `release/release-facts.json` |
 
 ## 驗證結果
 
-- PowerShell：`$env:PYTHONPATH = 'pipeline/src'; python -m pytest -q`：46 passed。
-- `flutter test --concurrency=1 --exclude-tags production-performance --reporter compact`：93 passed。
+- PowerShell：`$env:PYTHONPATH = 'pipeline/src'; python -m pytest -q`：48 passed。
+- `flutter test --concurrency=1 --exclude-tags production-performance --reporter compact`：94 passed。
 - `flutter analyze`：No issues found。
-- Production-like performance gate：通過；資料版本 `production-like-2026.07.26`，座標覆蓋率 99%，壓縮資料 454,914 bytes，首次匯入 p50/p95 為 1872.88/2528.55 ms，warm start 0.49/0.71 ms，附近查詢 2.54/4.38 ms，文字查詢 37.30/42.21 ms。
-- Release build 已進入 R8 並產生 unsigned AAB 與 mapping，但本機因 Android command-line tools／licenses 不完整而無法 strip debug symbols；尚未使用正式 upload key 產生可提交的 signed candidate。
+- Android 10/API 29、2 GB、x86_64 integration gate：通過；資料版本 `production-like-2026.07.26`，座標覆蓋率 99%，壓縮資料 454,914 bytes，首次匯入 p50/p95 為 1295.65/1893.05 ms，warm start 0.30/0.91 ms，附近查詢 2.11/5.67 ms，文字查詢 17.15/21.47 ms。報告明確記錄 `android_x64` runtime。
+- Release build 已完成 R8、resource shrink、native symbol stripping、obfuscation 並產生 55,397,543-byte AAB 與 mapping；`jarsigner` 證實該本機 toolchain-check AAB 為 unsigned，因此不是可提交候選。正式 upload key 仍只由擁有者／受保護 CI 注入。
 - Release-readiness 會掃描 Android、iOS、Web、scripts、release、workflow 與 pipeline 原始碼，拒絕硬編碼的 Google API key；目前掃描為 0 筆。
 
 ## 尚需人工或外部環境
 
-- 在指定的 Android 10／2 GB 實機重跑效能 gate。
 - 以受限 Google 金鑰執行裝置端 Maps／Places smoke test。
 - 配置 Firebase 專案後驗證 consent 開關與非敏感測試 crash。
 - 由 Play Console 擁有者提供簽章、客服／政策資訊，完成 closed test 與送審。

@@ -1,7 +1,21 @@
-# Firebase Crashlytics owner checklist
+# Deferred Firebase Crashlytics checklist
 
-This checklist intentionally contains no project IDs, secrets, service
-accounts, or writable credentials.
+First-release decision (2026-07-26): ATM Finder does not include Firebase,
+Crashlytics, Analytics, advertising SDKs or a diagnostics setting. No Firebase
+project or credential should be created for version 1.0.0.
+
+This future-only checklist intentionally contains no project IDs, secrets,
+service accounts, or writable credentials. It may be used only after a later
+product and privacy review explicitly restores crash diagnostics.
+
+## Dormant repository boundary
+
+- `CrashDiagnosticsBoundary` keeps the provider behind persisted opt-in and a
+  fixed allowlist; provider absence or failure cannot block the core flow.
+- Release code does not expose the diagnostics setting and does not include
+  Firebase Core, Crashlytics or Analytics dependencies or native configuration.
+
+## Future owner configuration
 
 1. Create a project dedicated to ATM Finder and register the exact release
    Android application ID.
@@ -24,3 +38,9 @@ accounts, or writable credentials.
    Play Data safety answers.
 10. Attach dated console screenshots and device results to Issue 29 without
     copying secret values.
+
+Use the official `flutterfire configure` workflow only after steps 1–2 are
+confirmed. Re-run it after adding `firebase_core` and `firebase_crashlytics` so
+the generated options and Android Crashlytics Gradle plugin match the selected
+project. Do not add `firebase_analytics`; breadcrumb logs are intentionally
+excluded because this product does not collect behavior analytics.

@@ -14,7 +14,8 @@ $requiredEnvironment = @(
     "ATM_UPLOAD_KEY_PASSWORD",
     "MAPS_API_KEY",
     "ATM_SUPPORT_EMAIL",
-    "QUALITY_REPORT_PATH"
+    "QUALITY_REPORT_PATH",
+    "ANDROID_PERFORMANCE_REPORT_PATH"
 )
 foreach ($name in $requiredEnvironment) {
     $value = [Environment]::GetEnvironmentVariable($name)
@@ -28,12 +29,37 @@ if (-not (Test-Path -LiteralPath $env:ATM_UPLOAD_KEYSTORE -PathType Leaf)) {
 if (-not (Test-Path -LiteralPath $env:QUALITY_REPORT_PATH -PathType Leaf)) {
     throw "QUALITY_REPORT_PATH does not identify a quality report"
 }
+if (-not (
+    Test-Path -LiteralPath $env:ANDROID_PERFORMANCE_REPORT_PATH -PathType Leaf
+)) {
+    throw "ANDROID_PERFORMANCE_REPORT_PATH does not identify a report"
+}
 if ($env:ATM_SUPPORT_EMAIL -eq "support@example.com") {
     throw "ATM_SUPPORT_EMAIL must be an owner-controlled address"
 }
 
+$androidPerformanceReport = Get-Content -Raw -LiteralPath (
+    $env:ANDROID_PERFORMANCE_REPORT_PATH
+) | ConvertFrom-Json
+if ($androidPerformanceReport.status -ne "passed") {
+    throw "Android performance gate did not pass"
+}
+if (
+    "$($androidPerformanceReport.environment.operatingSystem)" -notlike
+    "android *"
+) {
+    throw "Android performance report did not originate on Android"
+}
+if (
+    "$($androidPerformanceReport.environment.deviceProfile)" -notmatch
+    "API 29.*MemTotal"
+) {
+    throw "Android performance report is not from the required API 29 / 2 GB tier"
+}
+
 Push-Location $projectRoot
 try {
+    $env:PYTHONPATH = Join-Path $projectRoot "pipeline\src"
     python -m pytest pipeline\tests -q
     if ($LASTEXITCODE -ne 0) { throw "Python tests failed" }
 
@@ -78,6 +104,10 @@ try {
     ) -Destination $artifactDirectory
     Copy-Item -LiteralPath $env:QUALITY_REPORT_PATH `
         -Destination (Join-Path $artifactDirectory "quality-report.json")
+    Copy-Item -LiteralPath $env:ANDROID_PERFORMANCE_REPORT_PATH `
+        -Destination (
+            Join-Path $artifactDirectory "android-performance-report.json"
+        )
     Copy-Item -Path (Join-Path $projectRoot "performance\reports\*") `
         -Destination $artifactDirectory
 

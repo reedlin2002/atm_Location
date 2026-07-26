@@ -115,6 +115,44 @@ void main() {
     expect(indexes, hasLength(1));
   });
 
+  test('沒有座標的正式 ATM 仍可離線搜尋但不進入附近結果', () async {
+    final catalog = DriftAtmCatalog(
+      database,
+      _StringCatalogAssetSource(
+        jsonEncode({
+          'schemaVersion': 1,
+          'datasetVersion': 'unresolved-coordinate',
+          'sites': [
+            {
+              'id': 'unresolved-atm',
+              'institutionCode': '004',
+              'institutionName': '測試銀行',
+              'placeName': '待補座標據點',
+              'placeCategory': 'unknown',
+              'county': '臺北市',
+              'displayAddress': '臺北市測試路 9 號',
+              'latitude': null,
+              'longitude': null,
+            },
+          ],
+        }),
+      ),
+    );
+
+    expect(
+      await catalog.ensureBundledCatalogInstalled(),
+      isA<CatalogInstalled>(),
+    );
+    expect((await catalog.searchOffline('待補座標')).single.position, isNull);
+    expect(
+      await catalog.findNearby(
+        const GeoPoint(latitude: 25.0478, longitude: 121.5170),
+        radiusMeters: 10000,
+      ),
+      isEmpty,
+    );
+  });
+
   test(
     'catalog install round-trips confirmed access schedule and evidence',
     () async {
@@ -144,8 +182,8 @@ void main() {
                     },
                   ],
                 },
-              'accessEvidence': {
-                'source': 'manual-reviewed-override',
+                'accessEvidence': {
+                  'source': 'manual-reviewed-override',
                   'date': '2026-07-26',
                   'confidence': 'manual_reviewed',
                 },

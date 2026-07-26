@@ -23,7 +23,9 @@ void main() {
   testWidgets('行政區與帶空白地址片段可搜尋真實暫存 catalog', (tester) async {
     final catalog = DriftAtmCatalog(
       _database,
-      const RootBundleCatalogAssetSource(),
+      const RootBundleCatalogAssetSource(
+        assetPath: 'assets/catalog/baseline_fixture.json',
+      ),
     );
     final recentPlaces = DriftRecentPlacesRepository(_database);
     expect(
@@ -66,10 +68,7 @@ void main() {
     await tester.testTextInput.receiveAction(TextInputAction.search);
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('線上地點解析目前未設定或暫時無法使用；仍可搜尋本機 ATM 資料。'),
-      findsOneWidget,
-    );
+    expect(find.text('線上地點解析目前未設定或暫時無法使用；仍可搜尋本機 ATM 資料。'), findsOneWidget);
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
   });
@@ -110,7 +109,9 @@ void main() {
   testWidgets('最近地點可重用，重開頁面不會恢復舊 active query', (tester) async {
     final catalog = DriftAtmCatalog(
       _database,
-      const RootBundleCatalogAssetSource(),
+      const RootBundleCatalogAssetSource(
+        assetPath: 'assets/catalog/baseline_fixture.json',
+      ),
     );
     final repository = DriftRecentPlacesRepository(_database);
     expect(

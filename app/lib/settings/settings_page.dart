@@ -157,7 +157,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               ).showSnackBar(SnackBar(content: Text(message)));
             },
           ),
-          const DiagnosticsConsentTile(),
           const SizedBox(height: 16),
           OutlinedButton.icon(
             key: const ValueKey('reset-all-local-data'),
@@ -211,7 +210,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     ref.invalidate(favoritesProvider);
     ref.invalidate(catalogSnapshotProvider);
     ref.invalidate(catalogIsStaleProvider);
-    ref.invalidate(diagnosticsConsentProvider);
     ref.invalidate(appStartupProvider);
     ref.read(homeSearchProvider.notifier).reset();
     await widget.onReset?.call();
@@ -221,27 +219,5 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(localizations.resetComplete)));
-  }
-}
-
-class DiagnosticsConsentTile extends ConsumerWidget {
-  const DiagnosticsConsentTile({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final localizations = AppLocalizations.of(context);
-    final consent = ref.watch(diagnosticsConsentProvider);
-    return SwitchListTile(
-      key: const ValueKey('diagnostics-consent'),
-      secondary: const Icon(Icons.bug_report_outlined),
-      title: Text(localizations.diagnosticsTitle),
-      subtitle: Text(localizations.diagnosticsBody),
-      value: consent.value ?? false,
-      onChanged: consent.isLoading
-          ? null
-          : (enabled) => ref
-                .read(diagnosticsConsentProvider.notifier)
-                .setEnabled(enabled),
-    );
   }
 }
