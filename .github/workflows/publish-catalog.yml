@@ -1,0 +1,128 @@
+name: Publish catalog
+
+on:
+  workflow_dispatch:
+    inputs:
+      dataset_version:
+        description: Immutable catalog version, for example 2026.07.25.1
+        required: true
+        type: string
+      source_date:
+        description: Official source date in YYYY-MM-DD form
+        required: true
+        type: string
+      approve_anomalies:
+        description: Publish even when the change gate reports a >2% or regional/institution anomaly
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    environment: catalog-production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ inputs.dataset_version }}
+      SOURCE_DATE: ${{ inputs.source_date }}
+      APPROVE_ANOMALIES: ${{ inputs.approve_anomalies }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate pipeline
+        working-directory: pipeline
+        run: python -m pytest
+
+      - name: Download the official national ATM source
+        run: >-
+          curl --fail --silent --show-error --location
+          https://www.fisc.com.tw/TC/OPENDATA/A2_Location.csv
+          --output pipeline/A2_Location.csv
+
+      - name: Fetch the previous full snapshot when one exists
+        working-directory: pipeline
+        run: |
+          mkdir -p build/prior
+          if gh release download --pattern 'catalog-*.ndjson.gz' \
+            --dir build/prior 2>/dev/null; then
+            prior_catalog="$(find build/prior -type f -name 'catalog-*.ndjson.gz' | head -n 1)"
+            echo "PRIOR_CATALOG=$prior_catalog" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build and gate the release
+        working-directory: pipeline
+        env:
+          PYTHONPATH: src
+        run: |
+          args=(
+            --source A2_Location.csv
+            --source-format fisc
+            --source-name fisc-national-atm
+            --source-date "$SOURCE_DATE"
+            --output build/staged
+            --dataset-version "$VERSION"
+            --published-at "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            --artifact-base-url \
+              "https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}"
+            --publish-directory build/verified
+          )
+          if [ -n "${PRIOR_CATALOG:-}" ]; then
+            args+=(--prior-catalog "$PRIOR_CATALOG")
+          fi
+          if [ "$APPROVE_ANOMALIES" = "true" ]; then
+            args+=(--human-approved)
+          fi
+          python -m atm_catalog_builder "${args[@]}"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Verify staged artifact with the App contract
+        working-directory: app
+        env:
+          CATALOG_RELEASE_DIRECTORY: ${{ github.workspace }}/pipeline/build/staged
+        run: |
+          flutter pub get
+          flutter test test/catalog_artifact_contract_test.dart
+
+      - name: Create draft release and upload immutable assets
+        working-directory: pipeline
+        run: |
+          gh release create "$VERSION" --draft --title "ATM catalog $VERSION"
+          for asset in build/verified/*; do
+            if [ "$(basename "$asset")" != "manifest.json" ]; then
+              gh release upload "$VERSION" "$asset"
+            fi
+          done
+
+      - name: Verify uploaded immutable assets
+        working-directory: pipeline
+        run: |
+          mkdir build/readback
+          for asset in build/verified/*; do
+            name="$(basename "$asset")"
+            if [ "$name" != "manifest.json" ]; then
+              gh release download "$VERSION" --pattern "$name" --dir build/readback
+              test "$(sha256sum "$asset" | cut -d' ' -f1)" = \
+                "$(sha256sum "build/readback/$name" | cut -d' ' -f1)"
+            fi
+          done
+
+      - name: Publish fixed manifest last, then expose the release
+        working-directory: pipeline
+        run: |
+          gh release upload "$VERSION" build/verified/manifest.json
+          gh release download "$VERSION" --pattern manifest.json --dir build/readback
+          test "$(sha256sum build/verified/manifest.json | cut -d' ' -f1)" = \
+            "$(sha256sum build/readback/manifest.json | cut -d' ' -f1)"
+          gh release edit "$VERSION" --draft=false --latest

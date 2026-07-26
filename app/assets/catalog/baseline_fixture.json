@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "fixture-2026-07-25",
+  "sites": [
+    {
+      "id": "atm-bank-001",
+      "institutionCode": "004",
+      "institutionName": "臺灣銀行",
+      "placeName": "臺灣銀行館前分行",
+      "placeCategory": "bank",
+      "displayAddress": "臺北市中正區館前路 49 號",
+      "latitude": 25.0478,
+      "longitude": 121.5180
+    },
+    {
+      "id": "atm-store-001",
+      "institutionCode": "822",
+      "institutionName": "中國信託",
+      "placeName": "7-ELEVEN 台北站前門市",
+      "placeCategory": "convenience_store",
+      "displayAddress": "臺北市中正區忠孝西路一段 49 號",
+      "latitude": 25.0478,
+      "longitude": 121.5200
+    },
+    {
+      "id": "atm-post-001",
+      "institutionCode": "700",
+      "institutionName": "中華郵政",
+      "placeName": "臺北北門郵局",
+      "placeCategory": "post_office",
+      "displayAddress": "臺北市中正區忠孝西路一段 120 號",
+      "latitude": 25.0478,
+      "longitude": 121.5230
+    }
+  ]
+}

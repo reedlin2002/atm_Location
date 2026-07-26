@@ -1,0 +1,54 @@
+name: Catalog dry run
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run pipeline contract tests
+        working-directory: pipeline
+        run: python -m pytest
+
+      - name: Build and quality-gate a representative release
+        working-directory: pipeline
+        env:
+          PYTHONPATH: src
+        run: >-
+          python -m atm_catalog_builder
+          --source tests/fixtures/official_atms.csv
+          --source-name fixture-official-source
+          --source-date 2026-07-25
+          --output build/catalog-dry-run
+          --dataset-version 2026.07.25.1
+          --published-at 2026-07-25T08:00:00Z
+          --artifact-base-url
+          https://catalog.example.invalid/releases/2026.07.25.1
+          --dry-run
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Verify the workflow artifact with the App contract
+        working-directory: app
+        env:
+          CATALOG_RELEASE_DIRECTORY: ${{ github.workspace }}/pipeline/build/catalog-dry-run
+        run: |
+          flutter pub get
+          flutter test test/catalog_artifact_contract_test.dart
+

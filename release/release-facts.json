@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "applicationId": "com.reedlin2002.atmfinder",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "minSdk": 24,
+  "targetSdk": 36,
+  "defaultLocale": "zh-TW",
+  "accountRequired": false,
+  "advertising": false,
+  "backgroundLocation": false,
+  "crashDiagnosticsDefaultEnabled": false,
+  "crashDiagnosticsRequiresOptIn": true,
+  "supportEmailTemplate": "{{SUPPORT_EMAIL}}",
+  "locationUse": "foreground-on-demand-nearby-ranking",
+  "dataStorage": "local-device-only",
+  "financialTransactions": false
+}

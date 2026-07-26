@@ -1,0 +1,23 @@
+[
+  {
+    "target": "2f1efcb556c3bb405571fa0d22023d44b4810c1f26cebaeddf1c428d06ff9e05",
+    "fact": "coordinates",
+    "latitude": 25.0461,
+    "longitude": 121.5141,
+    "reason": "客服以銀行官方據點頁與現場回報確認",
+    "evidence": "https://example.test/review/atm-004-20260725",
+    "reviewer": "catalog-reviewer",
+    "reviewDate": "2026-07-25"
+  },
+  {
+    "target": "bfac381c2d29ed7c7196b4940a2355a6c007a52dc5370da561d58e4b1e3fb79e",
+    "fact": "coordinates",
+    "latitude": 25.0478,
+    "longitude": 121.517,
+    "reason": "舊客服修正",
+    "evidence": "https://example.test/review/expired",
+    "reviewer": "catalog-reviewer",
+    "reviewDate": "2026-01-01",
+    "expiry": "2026-07-24"
+  }
+]

@@ -1,0 +1,5 @@
+source_record_id,institution_code,institution_name,place_name,place_category,address,latitude,longitude,source_date
+bank-machine-1,004,臺灣銀行,臺灣銀行館前分行,bank,臺北市中正區館前路 51 號,25.0479,121.5181,2026-07-26
+bank-machine-2,004,臺灣銀行,臺灣銀行館前分行,bank,臺北市中正區館前路 51 號,25.0479,121.5181,2026-07-26
+post-machine-1,700,中華郵政,臺北北門郵局,post_office,臺北市中正區忠孝西路一段 120 號,25.0478,121.5230,2026-07-26
+other-bank-same-address,812,台新銀行,臺灣銀行館前分行,bank,臺北市中正區館前路 49 號,25.0478,121.5180,2026-07-26

@@ -1,0 +1,272 @@
+{
+  "@@locale": "zh",
+  "appTitle": "台灣 ATM Finder",
+  "nearbyAtmsTitle": "附近 ATM",
+  "loadingAtms": "正在載入附近 ATM",
+  "loadAtmsError": "目前無法載入 ATM 資料",
+  "retry": "重新嘗試",
+  "noNearbyAtms": "附近沒有找到 ATM",
+  "mapUnavailable": "地圖暫時無法使用",
+  "viewDetails": "詳細資料",
+  "placeCategoryLabel": "場所類型：{category}",
+  "@placeCategoryLabel": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "placeCategoryEvidenceSourceLabel": "場所來源：{source}",
+  "@placeCategoryEvidenceSourceLabel": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "coordinateEvidenceSourceLabel": "座標來源：{source}",
+  "@coordinateEvidenceSourceLabel": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "evidenceDateLabel": "資料日期：{date}",
+  "@evidenceDateLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "evidenceConfidenceLabel": "信心：{confidence}",
+  "@evidenceConfidenceLabel": {
+    "placeholders": {
+      "confidence": {
+        "type": "String"
+      }
+    }
+  },
+  "placeCategoryBank": "銀行",
+  "placeCategoryConvenienceStore": "便利商店",
+  "placeCategoryPostOffice": "郵局",
+  "placeCategoryOther": "其他場所",
+  "placeCategoryUnknown": "未知",
+  "evidencePublisherFisc": "財金公司公開資料",
+  "evidencePublisherMinistryOfDigitalAffairs": "數位發展部公開資料",
+  "evidencePublisherChunghwaPost": "中華郵政公開資料",
+  "evidencePublisherLicensedGeocoder": "已核准地址定位服務",
+  "evidencePublisherManualReview": "人工審核修正",
+  "evidencePublisherUnknown": "其他官方資料",
+  "evidenceConfidenceOfficialExact": "官方精確匹配",
+  "evidenceConfidenceOfficialPositive": "官方正面證據",
+  "evidenceConfidenceLicensedExact": "授權來源精確匹配",
+  "evidenceConfidenceLicensedFuzzy": "授權來源模糊匹配",
+  "evidenceConfidenceManualReviewed": "人工審核確認",
+  "evidenceConfidenceUnknown": "未知",
+  "capabilityLabel": "{capability}：{status}",
+  "@capabilityLabel": {
+    "placeholders": {
+      "capability": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "capabilityDeposit": "存款功能",
+  "capabilityAudioGuidance": "語音引導",
+  "capabilityVisualAccessibility": "視障無障礙",
+  "capabilityWheelchairAccessibility": "輪椅無障礙",
+  "capabilityForeignCurrencyWithdrawal": "外幣提款",
+  "capabilityStatusConfirmed": "已確認",
+  "capabilityStatusUnknown": "未知",
+  "capabilityStatusUnsupported": "不支援",
+  "distanceMeters": "{distance} 公尺",
+  "@distanceMeters": {
+    "placeholders": {
+      "distance": {
+        "type": "int"
+      }
+    }
+  },
+  "distanceKilometers": "{distance} 公里",
+  "@distanceKilometers": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingHelpTitle": "使用說明",
+  "onboardingWelcome": "歡迎使用台灣 ATM Finder",
+  "onboardingSummary": "不用登入也能搜尋已下載的 ATM 公開資料。",
+  "onboardingLocationTitle": "定位用途",
+  "onboardingLocationBody": "只有你主動點選「找我附近」時，才會要求前景定位；也可以略過並手動搜尋。",
+  "onboardingSourcesTitle": "資料來源",
+  "onboardingSourcesBody": "ATM 主資料來自財金公司與其他具公開授權的政府或機構資料。",
+  "onboardingPrivacyTitle": "隱私說明",
+  "onboardingPrivacyBody": "離線搜尋不需要接受資料蒐集。當次位置只用來排序附近結果，不保存位置歷史。",
+  "skip": "略過",
+  "back": "返回",
+  "findNearby": "找我附近",
+  "locationDeniedMessage": "未授權定位，仍可使用手動搜尋",
+  "manualSearch": "手動搜尋",
+  "locationDeniedForeverMessage": "定位權限已永久拒絕，請到系統設定開啟",
+  "openSystemSettings": "前往系統設定",
+  "locationServicesDisabledMessage": "裝置的定位服務已關閉",
+  "openLocationSettings": "開啟定位設定",
+  "locationProviderFailureMessage": "暫時無法取得位置，請稍後再試",
+  "offlineSearchHint": "銀行、場所、地址、縣市或行政區",
+  "search": "搜尋",
+  "offlineSearchPrompt": "輸入本機 catalog 中的 ATM 資訊",
+  "offlinePlaceNeedsConnection": "本機 catalog 找不到這個地點；解析 catalog 外的新地標需要網路連線。",
+  "placeResolverUnavailable": "線上地點解析目前未設定或暫時無法使用；仍可搜尋本機 ATM 資料。",
+  "placeOutsideTaiwanUnsupported": "目前只支援台灣境內的地址、車站與地標。",
+  "choosePlace": "選擇地點",
+  "searchRadiusStraightLine": "搜尋半徑：{radius} 公里（直線距離）",
+  "@searchRadiusStraightLine": {
+    "placeholders": {
+      "radius": {
+        "type": "int"
+      }
+    }
+  },
+  "noAtmsWithinTenKm": "10 公里內沒有符合條件的 ATM",
+  "clearFilters": "清除篩選",
+  "filtersTitle": "篩選條件",
+  "capabilitiesTitle": "ATM 能力",
+  "placeCategoriesTitle": "場所類型",
+  "institutionFilterTitle": "銀行篩選",
+  "preferredBanksTitle": "常用銀行",
+  "primaryBank": "主要銀行",
+  "preferSameBank": "同銀行優先",
+  "bankFeeDisclaimer": "是否同銀行僅供辨識；實際手續費與優惠請向銀行確認。",
+  "openNow": "目前營業",
+  "twentyFourHours": "24 小時",
+  "expandRadius": "擴大搜尋範圍",
+  "searchMapArea": "搜尋地圖區域",
+  "mapClusterLabel": "{count} 個 ATM",
+  "@mapClusterLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recentPlaces": "最近地點",
+  "clearAll": "全部清除",
+  "deleteRecentPlace": "刪除最近地點",
+  "recentPlaceSaved": "已加入最近地點",
+  "favoritesTitle": "收藏",
+  "addFavorite": "加入收藏",
+  "removeFavorite": "取消收藏",
+  "retiredFavoriteWarning": "此 ATM 已從最新資料來源撤除，以下為最後已知資料。",
+  "catalogVersionLabel": "資料集版本：{version}",
+  "@catalogVersionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "catalogRefreshedAtLabel": "最近更新：{date}",
+  "@catalogRefreshedAtLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "staleDataWarning": "ATM 資料超過 30 天未更新，可能有遺漏的最新變化",
+  "detailDistanceLabel": "距離：{distance}",
+  "@detailDistanceLabel": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "navigateToAtm": "導航至 ATM",
+  "shareAtm": "分享 ATM",
+  "reportAtmData": "回報 ATM 資料",
+  "externalActionUnavailable": "目前沒有可處理此操作的 App，請稍後再試",
+  "supportEmailCopied": "無法開啟郵件 App，客服信箱已複製",
+  "settingsTitle": "設定",
+  "localDataOnlyTitle": "資料只存在這台裝置",
+  "localDataOnlyBody": "不需登入，也不會跨裝置同步；偏好、最近搜尋與收藏只保存在本機。",
+  "searchPreferences": "搜尋偏好",
+  "manageFilters": "管理銀行、能力、場所與營業時間篩選",
+  "filtersCleared": "已恢復篩選與排序預設值",
+  "favoriteCount": "{count} 個收藏",
+  "@favoriteCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noRecentPlaces": "尚無最近搜尋",
+  "reviewOnboarding": "重新查看使用與權限說明",
+  "settingsFeedback": "提供意見回饋",
+  "resetAllLocalData": "重設所有本機資料",
+  "resetAllDescription": "這會清除偏好、最近搜尋、收藏、同意狀態與已安裝 ATM 資料。",
+  "resetDialogTitle": "確定要重設所有資料？",
+  "resetDialogBody": "此操作無法復原。下次將重新安裝隨附資料並顯示首次使用說明。",
+  "cancel": "取消",
+  "confirmReset": "確認重設",
+  "resetComplete": "本機資料已重設",
+  "diagnosticsTitle": "自願提供當機診斷",
+  "diagnosticsBody": "預設關閉。開啟後只傳送錯誤類型、堆疊與低敏感度版本資訊；不傳位置、搜尋、最近地點、收藏、ATM 選取或廣告識別碼。",
+  "atmResultSemantics": "ATM 結果，{institution}，{place}，{address}，距離 {distance}",
+  "@atmResultSemantics": {
+    "placeholders": {
+      "institution": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      },
+      "address": {
+        "type": "String"
+      },
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "moreOptions": "更多選項",
+  "atmSummarySemantics": "已選取 {place}，ATM 摘要",
+  "@atmSummarySemantics": {
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "accessStatusLabel": "進入狀態：{status}",
+  "@accessStatusLabel": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "accessStatusSemantics": "進入狀態{status}",
+  "@accessStatusSemantics": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "accessStatusOpen": "目前營業",
+  "accessStatusUnknown": "未知（無可靠時段資料）",
+  "accessStatusClosed": "目前關閉",
+  "accessStatusTwentyFourHours": "24 小時",
+  "bankRelationshipSame": "本行 ATM",
+  "bankRelationshipCross": "跨行 ATM",
+  "removeFilter": "移除此篩選"
+}

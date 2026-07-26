@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "production-like-2026.07.26",
+  "environment": {
+    "operatingSystem": "windows \"Windows 11 家用版\" 10.0 (Build 26200)",
+    "runtime": "3.12.2 (stable) (Tue Jun 9 01:11:39 2026 -0700) on \"windows_x64\"",
+    "deviceProfile": "ci-host-proxy; Android 10 / 2 GB physical-device rerun required"
+  },
+  "dataQuality": {
+    "recordCount": 25000,
+    "coordinateCount": 24750,
+    "coordinateCoverage": 0.99,
+    "compressedBytes": 454914,
+    "unresolvedByCounty": {
+      "臺東縣": 250
+    }
+  },
+  "timings": {
+    "firstImport": {
+      "sampleCount": 3,
+      "p50Milliseconds": 1872.884,
+      "p95Milliseconds": 2528.55,
+      "minimumMilliseconds": 1560.207,
+      "maximumMilliseconds": 2528.55
+    },
+    "warmStart": {
+      "sampleCount": 30,
+      "p50Milliseconds": 0.493,
+      "p95Milliseconds": 0.712,
+      "minimumMilliseconds": 0.291,
+      "maximumMilliseconds": 12.708
+    },
+    "nearbyQuery": {
+      "sampleCount": 60,
+      "p50Milliseconds": 2.545,
+      "p95Milliseconds": 4.376,
+      "minimumMilliseconds": 1.365,
+      "maximumMilliseconds": 13.484
+    },
+    "textSearch": {
+      "sampleCount": 30,
+      "p50Milliseconds": 37.3,
+      "p95Milliseconds": 42.212,
+      "minimumMilliseconds": 30.527,
+      "maximumMilliseconds": 42.562
+    }
+  },
+  "thresholds": {
+    "minimumCoordinateCoverage": 0.98,
+    "maximumCompressedBytes": 10485760,
+    "maximumFirstImportP95Milliseconds": 5000.0,
+    "maximumWarmStartP95Milliseconds": 2000.0,
+    "maximumNearbyQueryP95Milliseconds": 300.0
+  },
+  "status": "passed",
+  "violations": []
+}
