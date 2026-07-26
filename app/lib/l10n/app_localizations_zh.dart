@@ -371,7 +371,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get resetAllLocalData => '重設所有本機資料';
 
   @override
-  String get resetAllDescription => '這會清除偏好、最近搜尋、收藏、同意狀態與已安裝 ATM 資料。';
+  String get resetAllDescription => '這會清除偏好、最近搜尋、收藏與已安裝 ATM 資料。';
 
   @override
   String get resetDialogTitle => '確定要重設所有資料？';
@@ -387,13 +387,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get resetComplete => '本機資料已重設';
-
-  @override
-  String get diagnosticsTitle => '自願提供當機診斷';
-
-  @override
-  String get diagnosticsBody =>
-      '預設關閉。開啟後只傳送錯誤類型、堆疊與低敏感度版本資訊；不傳位置、搜尋、最近地點、收藏、ATM 選取或廣告識別碼。';
 
   @override
   String atmResultSemantics(
@@ -812,7 +805,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get resetAllLocalData => '重設所有本機資料';
 
   @override
-  String get resetAllDescription => '這會清除偏好、最近搜尋、收藏、同意狀態與已安裝 ATM 資料。';
+  String get resetAllDescription => '這會清除偏好、最近搜尋、收藏與已安裝 ATM 資料。';
 
   @override
   String get resetDialogTitle => '確定要重設所有資料？';
@@ -828,13 +821,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get resetComplete => '本機資料已重設';
-
-  @override
-  String get diagnosticsTitle => '自願提供當機診斷';
-
-  @override
-  String get diagnosticsBody =>
-      '預設關閉。開啟後只傳送錯誤類型、堆疊與低敏感度版本資訊；不傳位置、搜尋、最近地點、收藏、ATM 選取或廣告識別碼。';
 
   @override
   String atmResultSemantics(

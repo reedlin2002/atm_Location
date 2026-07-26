@@ -7,6 +7,10 @@ on:
         description: HTTPS URL of the immutable production quality report
         required: true
         type: string
+      android_performance_report_url:
+        description: HTTPS URL of the immutable Android 10 / 2 GB report
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -23,6 +27,14 @@ jobs:
       ATM_SUPPORT_EMAIL: ${{ secrets.ATM_SUPPORT_EMAIL }}
     steps:
       - uses: actions/checkout@v4
+      - name: Load verified release facts
+        id: release_facts
+        run: |
+          echo "version_name=$(jq -r '.versionName' release/release-facts.json)" \
+            >> "$GITHUB_OUTPUT"
+          echo "version_code=$(jq -r '.versionCode' release/release-facts.json)" \
+            >> "$GITHUB_OUTPUT"
+          test "$(jq -r '.targetSdk' release/release-facts.json)" = "36"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -47,6 +59,20 @@ jobs:
           test -n "$MAPS_API_KEY"
           test -n "$ATM_SUPPORT_EMAIL"
           test "$ATM_SUPPORT_EMAIL" != "support@example.com"
+      - name: Fetch and validate immutable gate reports
+        run: |
+          mkdir -p release-inputs
+          curl --fail --location --proto '=https' \
+            '${{ inputs.quality_report_url }}' \
+            --output release-inputs/quality-report.json
+          curl --fail --location --proto '=https' \
+            '${{ inputs.android_performance_report_url }}' \
+            --output release-inputs/android-performance-report.json
+          jq -e '
+            .status == "passed" and
+            (.environment.operatingSystem | startswith("android ")) and
+            (.environment.deviceProfile | test("API 29.*MemTotal"))
+          ' release-inputs/android-performance-report.json
       - run: python -m pip install -e pipeline
       - name: Python tests and release-readiness
         run: python -m pytest pipeline/tests -q
@@ -64,8 +90,8 @@ jobs:
         working-directory: app
         run: |
           flutter build appbundle --release \
-            --build-name=1.0.0 \
-            --build-number=1 \
+            --build-name="${{ steps.release_facts.outputs.version_name }}" \
+            --build-number="${{ steps.release_facts.outputs.version_code }}" \
             --obfuscate \
             --split-debug-info=../release-out/symbols \
             --dart-define=ATM_SUPPORT_EMAIL="$ATM_SUPPORT_EMAIL"
@@ -75,9 +101,8 @@ jobs:
           cp app/build/app/outputs/bundle/release/app-release.aab release-out/
           cp app/build/app/outputs/mapping/release/mapping.txt release-out/
           cp -R performance/reports release-out/performance-reports
-          curl --fail --location --proto '=https' \
-            '${{ inputs.quality_report_url }}' \
-            --output release-out/quality-report.json
+          cp release-inputs/quality-report.json release-out/
+          cp release-inputs/android-performance-report.json release-out/
           printf 'revision=%s\nworkflow=%s\n' \
             "$GITHUB_SHA" "$GITHUB_RUN_ID" > release-out/test-summary.txt
           find release-out -type f ! -name SHA256SUMS -print0 \
@@ -85,7 +110,7 @@ jobs:
             | xargs -0 sha256sum > release-out/SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
-          name: atm-finder-1.0.0-rc-${{ github.run_number }}
+          name: atm-finder-${{ steps.release_facts.outputs.version_name }}-rc-${{ github.run_number }}
           path: release-out/
           if-no-files-found: error
           retention-days: 90

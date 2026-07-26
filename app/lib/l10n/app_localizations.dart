@@ -766,7 +766,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetAllDescription.
   ///
   /// In zh_TW, this message translates to:
-  /// **'這會清除偏好、最近搜尋、收藏、同意狀態與已安裝 ATM 資料。'**
+  /// **'這會清除偏好、最近搜尋、收藏與已安裝 ATM 資料。'**
   String get resetAllDescription;
 
   /// No description provided for @resetDialogTitle.
@@ -798,18 +798,6 @@ abstract class AppLocalizations {
   /// In zh_TW, this message translates to:
   /// **'本機資料已重設'**
   String get resetComplete;
-
-  /// No description provided for @diagnosticsTitle.
-  ///
-  /// In zh_TW, this message translates to:
-  /// **'自願提供當機診斷'**
-  String get diagnosticsTitle;
-
-  /// No description provided for @diagnosticsBody.
-  ///
-  /// In zh_TW, this message translates to:
-  /// **'預設關閉。開啟後只傳送錯誤類型、堆疊與低敏感度版本資訊；不傳位置、搜尋、最近地點、收藏、ATM 選取或廣告識別碼。'**
-  String get diagnosticsBody;
 
   /// No description provided for @atmResultSemantics.
   ///

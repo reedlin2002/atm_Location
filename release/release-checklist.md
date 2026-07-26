@@ -6,11 +6,13 @@
 - [ ] 以未入版控的 upload keystore、alias、store password、key password 簽署；
       `apksigner`／Play App signing 證據確認不是 debug certificate。
 - [ ] 舊的硬編碼 Maps key 已由擁有者輪替；Android key 只允許正式 package 與
-      debug/release SHA，API 只允許 Maps SDK；Places server key 分離並限制配額。
-- [ ] `ATM_SUPPORT_EMAIL` 是由擁有者控制的真實信箱，隱私政策中的
-      `{{SUPPORT_EMAIL}}` 已替換，且政策已有公開 HTTPS URL。
-- [ ] Firebase 僅啟用 Crashlytics；Analytics／廣告停用；未同意零事件、同意後
-      只有 allowlist、撤回清除 pending 的真機證據已附上。
+      debug/release SHA，API 只允許 Maps SDK；Places／Geocoding 維持停用。
+- [ ] `ATM_SUPPORT_EMAIL` 是 `lin1022business@gmail.com`，且隱私政策已有
+      公開 HTTPS URL。
+- [ ] Release 依賴、Android manifest、iOS plist 與 App UI 均不含 Firebase、
+      Crashlytics、Analytics、廣告 SDK 或診斷同意入口。
+- [ ] Data safety 與隱私政策已依目前 Maps SDK 官方 disclosure 申報裝置／請求
+      中繼資料、SDK 當機指標、IP、SDK 識別碼及地圖互動，未誤填為零蒐集。
 - [ ] Python、Flutter tests、analyze、release-readiness、25k performance gate、
       正式資料品質報告全部通過。
 - [ ] 25k CI proxy 之外，Android 10／2 GB 最低裝置報告通過 5s／2s／300ms

@@ -1,0 +1,8 @@
+00:00 +0: loading C:/Users/JerryLin/Desktop/workspace/atm_Location/app/integration_test/production_performance_gate_test.dart
+Running Gradle task 'assembleDebug'...                             24.1s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+Installing build\app\outputs\flutter-apk\app-debug.apk...        1,516ms
+00:00 +0: Android 10 / 2 GB production-like performance gate
+ATM_PERFORMANCE_REPORT_JSON={"schemaVersion":1,"datasetVersion":"production-like-2026.07.26","environment":{"operatingSystem":"android sdk_gphone_x86_64-userdebug 10 QSR1.211112.011 13135432 dev-keys","runtime":"3.12.2 (stable) (Tue Jun 9 01:11:39 2026 -0700) on \"android_x64\"","deviceProfile":"Android 10/API 29; MemTotal 2040256 kB; Android SDK built for x86_64; x86_64"},"dataQuality":{"recordCount":25000,"coordinateCount":24750,"coordinateCoverage":0.99,"compressedBytes":454914,"unresolvedByCounty":{"臺東縣":250}},"timings":{"firstImport":{"sampleCount":3,"p50Milliseconds":1295.651,"p95Milliseconds":1893.048,"minimumMilliseconds":1097.356,"maximumMilliseconds":1893.048},"warmStart":{"sampleCount":30,"p50Milliseconds":0.297,"p95Milliseconds":0.907,"minimumMilliseconds":0.258,"maximumMilliseconds":18.407},"nearbyQuery":{"sampleCount":60,"p50Milliseconds":2.114,"p95Milliseconds":5.669,"minimumMilliseconds":0.857,"maximumMilliseconds":29.541},"textSearch":{"sampleCount":30,"p50Milliseconds":17.146,"p95Milliseconds":21.466,"minimumMilliseconds":14.122,"maximumMilliseconds":25.136}},"thresholds":{"minimumCoordinateCoverage":0.98,"maximumCompressedBytes":10485760,"maximumFirstImportP95Milliseconds":5000.0,"maximumWarmStartP95Milliseconds":2000.0,"maximumNearbyQueryP95Milliseconds":300.0},"status":"passed","violations":[]}
+00:06 +1: (tearDownAll)
+00:06 +1: All tests passed!

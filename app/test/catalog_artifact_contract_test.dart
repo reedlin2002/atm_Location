@@ -269,6 +269,94 @@ void main() {
       await database.close();
     }
   });
+
+  test('SQLite 寫入失敗時保留先前已驗證 catalog', () async {
+    final database = AtmDatabase(NativeDatabase.memory());
+    try {
+      final initial = _singleSiteArtifact(
+        datasetVersion: 'verified-before-storage-failure',
+        siteId: 'verified-atm',
+        placeName: '原有 ATM',
+      );
+      expect(
+        await CatalogArtifactImporter(database).installFullSnapshot(
+          manifestJson: initial.manifestJson,
+          compressedSnapshot: initial.compressedSnapshot,
+        ),
+        isA<CatalogArtifactInstalled>(),
+      );
+
+      await database.customStatement('''
+        CREATE TRIGGER simulate_disk_full
+        BEFORE INSERT ON atm_sites
+        BEGIN
+          SELECT RAISE(FAIL, 'database or disk is full');
+        END
+      ''');
+      final replacement = _singleSiteArtifact(
+        datasetVersion: 'replacement-that-cannot-be-written',
+        siteId: 'replacement-atm',
+        placeName: '替代 ATM',
+      );
+
+      expect(
+        await CatalogArtifactImporter(database).installFullSnapshot(
+          manifestJson: replacement.manifestJson,
+          compressedSnapshot: replacement.compressedSnapshot,
+        ),
+        isA<CatalogArtifactRejected>(),
+      );
+
+      final catalog = DriftAtmCatalog(
+        database,
+        const _UnexpectedCatalogAssetSource(),
+      );
+      expect(
+        (await catalog.searchOffline('原有 ATM')).map((site) => site.id),
+        contains('verified-atm'),
+      );
+      expect(await catalog.searchOffline('替代 ATM'), isEmpty);
+    } finally {
+      await database.close();
+    }
+  });
+}
+
+({
+  String manifestJson,
+  List<int> compressedSnapshot,
+}) _singleSiteArtifact({
+  required String datasetVersion,
+  required String siteId,
+  required String placeName,
+}) {
+  final compressedSnapshot = gzip.encode(
+    utf8.encode(
+      '${jsonEncode({
+        'id': siteId,
+        'institutionCode': '004',
+        'institutionName': '臺灣銀行',
+        'placeName': placeName,
+        'placeCategory': 'bank',
+        'county': '臺北市',
+        'displayAddress': '臺北市中正區館前路49號',
+        'latitude': 25.0461,
+        'longitude': 121.5141,
+        'capabilities': <String, Object?>{},
+      })}\n',
+    ),
+  );
+  return (
+    manifestJson: jsonEncode({
+      'schemaVersion': 1,
+      'datasetVersion': datasetVersion,
+      'recordCount': 1,
+      'fullSnapshot': {
+        'sha256': sha256.convert(compressedSnapshot).toString(),
+      },
+    }),
+    compressedSnapshot: compressedSnapshot,
+  );
 }
 
 class _UnexpectedCatalogAssetSource implements CatalogAssetSource {

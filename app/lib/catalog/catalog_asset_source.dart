@@ -5,20 +5,12 @@ abstract interface class CatalogAssetSource {
 }
 
 class RootBundleCatalogAssetSource implements CatalogAssetSource {
-  const RootBundleCatalogAssetSource();
+  const RootBundleCatalogAssetSource({
+    this.assetPath = 'assets/catalog/baseline_catalog.json',
+  });
 
-  static String? _cachedCatalog;
+  final String assetPath;
 
   @override
-  Future<String> loadBundledCatalog() async {
-    final cached = _cachedCatalog;
-    if (cached != null) {
-      return cached;
-    }
-    final catalog = await rootBundle.loadString(
-      'assets/catalog/baseline_fixture.json',
-    );
-    _cachedCatalog = catalog;
-    return catalog;
-  }
+  Future<String> loadBundledCatalog() => rootBundle.loadString(assetPath);
 }

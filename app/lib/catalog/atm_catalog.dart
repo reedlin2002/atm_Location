@@ -403,17 +403,19 @@ class DriftAtmCatalog implements AtmCatalog, AtmSiteLookup {
     final institutionName = raw['institutionName'] as String;
     final placeName = raw['placeName'] as String;
     final displayAddress = raw['displayAddress'] as String;
-    final latitude = (raw['latitude'] as num).toDouble();
-    final longitude = (raw['longitude'] as num).toDouble();
+    final latitude = (raw['latitude'] as num?)?.toDouble();
+    final longitude = (raw['longitude'] as num?)?.toDouble();
     if (id.trim().isEmpty ||
         institutionCode.trim().isEmpty ||
         institutionName.trim().isEmpty ||
         placeName.trim().isEmpty ||
         displayAddress.trim().isEmpty ||
-        latitude < -90 ||
-        latitude > 90 ||
-        longitude < -180 ||
-        longitude > 180) {
+        (latitude == null) != (longitude == null) ||
+        (latitude != null &&
+            (latitude < -90 ||
+                latitude > 90 ||
+                longitude! < -180 ||
+                longitude > 180))) {
       throw const FormatException('Invalid ATM site');
     }
 
@@ -430,7 +432,9 @@ class DriftAtmCatalog implements AtmCatalog, AtmSiteLookup {
         displayAddress,
         county: (raw['county'] as String?) ?? '',
       ),
-      position: GeoPoint(latitude: latitude, longitude: longitude),
+      position: latitude == null
+          ? null
+          : GeoPoint(latitude: latitude, longitude: longitude!),
       coordinateEvidence: _parseAttribution(raw['coordinateEvidence']),
       placeCategoryEvidence: _parseAttribution(raw['placeCategoryEvidence']),
       capabilities: _parseCapabilities(raw['capabilities']),

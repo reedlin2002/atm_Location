@@ -47,6 +47,8 @@ dev_dependencies:
   drift_dev: 2.34.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,6 +69,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/catalog/baseline_catalog.json
     - assets/catalog/baseline_fixture.json
 
   # To add assets to your application, add an assets section, like this:

@@ -1,6 +1,6 @@
 # Financial features declaration 工作表
 
-最終宣告由 Play Console 擁有者確認。聯絡：{{SUPPORT_EMAIL}}。
+最終宣告由 Play Console 擁有者確認。聯絡：lin1022business@gmail.com。
 
 台灣 ATM Finder 只顯示 ATM 的公開位置、銀行、場所、距離、來源、資料新鮮度，
 以及有明確證據的存款、無障礙、外幣提款等服務狀態。App 不連線到銀行帳戶，

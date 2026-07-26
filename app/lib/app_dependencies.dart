@@ -2,7 +2,6 @@ import 'package:atmfinder/catalog/atm_catalog.dart';
 import 'package:atmfinder/catalog/atm_database.dart';
 import 'package:atmfinder/catalog/catalog_asset_source.dart';
 import 'package:atmfinder/catalog/catalog_update.dart';
-import 'package:atmfinder/diagnostics/crash_diagnostics.dart';
 import 'package:atmfinder/external/external_actions.dart';
 import 'package:atmfinder/favorites/favorites.dart';
 import 'package:atmfinder/home/home_search.dart';
@@ -119,40 +118,6 @@ final localSettingsManagerProvider = Provider<LocalSettingsManager>(
   ),
 );
 
-final diagnosticsConsentRepositoryProvider =
-    Provider<DiagnosticsConsentRepository>(
-      (ref) =>
-          DriftDiagnosticsConsentRepository(ref.watch(atmDatabaseProvider)),
-    );
-
-final crashDiagnosticsProvider = Provider<CrashDiagnosticsProvider?>(
-  (ref) => null,
-);
-
-final crashDiagnosticsBoundaryProvider = Provider<CrashDiagnosticsBoundary>(
-  (ref) => CrashDiagnosticsBoundary(
-    consent: ref.watch(diagnosticsConsentRepositoryProvider),
-    provider: ref.watch(crashDiagnosticsProvider),
-  ),
-);
-
-final diagnosticsConsentProvider =
-    AsyncNotifierProvider<DiagnosticsConsentController, bool>(
-      DiagnosticsConsentController.new,
-    );
-
-class DiagnosticsConsentController extends AsyncNotifier<bool> {
-  @override
-  Future<bool> build() {
-    return ref.watch(diagnosticsConsentRepositoryProvider).isEnabled();
-  }
-
-  Future<void> setEnabled(bool enabled) async {
-    await ref.read(crashDiagnosticsBoundaryProvider).setEnabled(enabled);
-    state = AsyncData(enabled);
-  }
-}
-
 final userSettingsProvider =
     AsyncNotifierProvider<UserSettingsController, UserSettings>(
       UserSettingsController.new,
@@ -182,7 +147,7 @@ final atmResultPolicyProvider = Provider<AtmResultPolicy>(
 
 const _supportEmail = String.fromEnvironment(
   'ATM_SUPPORT_EMAIL',
-  defaultValue: 'support@example.com',
+  defaultValue: 'lin1022business@gmail.com',
 );
 
 final externalActionGatewayProvider = Provider<ExternalActionGateway>(

@@ -130,6 +130,15 @@ App 會整合財金公司、數位發展部、中華郵政、金管會銀行局�
 
 ## Implementation Decisions
 
+### First-release provider scope
+
+On 2026-07-26 the owner selected a personal Play account and
+`lin1022business@gmail.com` as the public support contact. Version 1.0.0 uses
+Maps SDK for Android only: online Places/Geocoding resolution is deferred.
+Firebase, Crashlytics, Analytics, advertising SDKs and the diagnostics consent
+UI are excluded. Existing provider-neutral place and diagnostics boundaries
+remain dormant future code and do not describe release behavior.
+
 ### Product scope and terminology
 
 - Product working name is **台灣 ATM Finder**. Final store name, icon and brand assets are a release task, not an architecture dependency.
@@ -190,7 +199,9 @@ App 會整合財金公司、數位發展部、中華郵政、金管會銀行局�
 - Do not request background location. Do not request notification permission.
 - Without location permission, the user can search by online place resolution, recent manual searches, administrative area, ATM place name/address, or map movement.
 - Offline manual search covers content already present in the ATM catalog, including institution, place name, address, county and district. Arbitrary new landmark-to-coordinate resolution may require a network connection.
-- Online manual place resolution is isolated behind a provider interface. The default provider is Google Places/Geocoding with Android/iOS key restrictions and daily quotas set below the monthly free-use allowance.
+- Online manual place resolution remains isolated behind a provider interface,
+  but the first release leaves it unavailable and does not enable Google
+  Places／Geocoding.
 - Recent searches store only user-entered label, resolved coordinate and timestamp, up to 10 entries, locally. They never store passive current-location samples.
 - Nearby search begins at 1 km, then automatically tries 3 km, 5 km and 10 km until it has at least 20 eligible results.
 - Show at most the nearest 50 results initially. If none are found at 10 km, offer an explicit wider search or map-area search rather than silently expanding without limit.
@@ -320,8 +331,12 @@ App 會整合財金公司、數位發展部、中華郵政、金管會銀行局�
 - Foreground location is used to perform the current search and is not uploaded to the project's own service.
 - Diagnostic reporting is opt-in and default-off.
 - Diagnostic payloads may include stack trace, App version, operating-system version and device model. They must not add precise/approximate location, query text, preferred institutions, filters, recent searches, favorites, ATM viewed, email content or advertising ID.
-- Use Firebase Crashlytics only behind the diagnostic boundary and only after consent; do not enable Firebase Analytics.
-- Restrict Google Maps/Places keys by Android package and signing certificate, by iOS bundle ID when added, and by API allowlist and quota.
+- The first release does not include Firebase, Crashlytics, Analytics,
+  advertising SDKs or a diagnostics-consent flow. Any future diagnostics work
+  requires a new product and privacy decision.
+- Restrict the Android Maps key by package and signing certificate and allow
+  only Maps SDK for Android. Places／Geocoding remain disabled in the first
+  release.
 - Pipeline geocoder credentials and release secrets live in CI secret storage and never in repository artifacts.
 - Use HTTPS for all data downloads. Verify artifact SHA-256 and monotonic version before import.
 - Provide a Traditional Chinese privacy policy and accurate Google Play Data safety declaration before closed testing.
@@ -489,7 +504,7 @@ App 會整合財金公司、數位發展部、中華郵政、金管會銀行局�
 - [全國郵局 ATM 分布](https://data.gov.tw/en/datasets/6121): daily postal locations, coordinates and postal capabilities.
 - [可供視障民眾使用之 ATM 設置地點資訊](https://data.gov.tw/dataset/73189): daily accessibility positive list; related wheelchair data should be integrated through its own adapter.
 - [TGOS address-location documentation](https://api.tgos.tw/TGOS_MAP_API/docs/site/web/AddrLocate): Taiwan-specific address location candidate; current application and redistribution terms must be archived before production use.
-- [Google Maps Platform pricing](https://developers.google.com/maps/billing-and-pricing/pricing): current native Maps SDK usage and Places/Geocoding quotas must be rechecked at implementation and release time.
+- [Google Maps Platform pricing](https://developers.google.com/maps/billing-and-pricing/pricing): current native Maps SDK usage and budget controls must be rechecked at implementation and release time; Places／Geocoding are deferred.
 - [Google Play testing requirements](https://support.google.com/googleplay/android-developer/answer/14151465): current new-personal-account closed-test requirement.
 - [Google Play Financial features declaration](https://support.google.com/googleplay/android-developer/answer/13849271): mandatory declaration even when the App declares no financial features.
 

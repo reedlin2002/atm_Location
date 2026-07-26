@@ -1,6 +1,6 @@
 # 28：控制自願加入的當機診斷
 
-Status: ready-for-human
+Status: wontfix
 
 Type: AFK
 
@@ -38,6 +38,11 @@ User stories covered: 56, 57, 58, 77, 78, 79, 90
 ## Blocked by
 
 - [27：管理本機設定與重設資料](./27-manage-local-settings-and-reset.md)
+
+## Release decision
+
+- 2026-07-26：擁有者決定 1.0.0 不含遠端當機診斷。設定入口已移除；
+  provider-neutral consent boundary 僅保留為未連線的未來程式，不代表首版功能。
 
 ## Work log
 

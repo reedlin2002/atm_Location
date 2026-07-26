@@ -1,6 +1,6 @@
 # 29：設定 Firebase 當機回報
 
-Status: ready-for-human
+Status: wontfix
 
 Type: HITL
 
@@ -31,3 +31,8 @@ User stories covered: 77, 78, 79, 88, 90
 
 - [01：建立獨立專案儲存庫](./01-create-dedicated-project-repository.md)
 - [28：控制自願加入的當機診斷](./28-control-opt-in-crash-diagnostics.md)
+
+## Decision
+
+- 2026-07-26：擁有者決定 1.0.0 不建立 Firebase project、不加入
+  Firebase／Crashlytics／Analytics SDK，也不顯示診斷同意入口。
