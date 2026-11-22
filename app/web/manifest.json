@@ -1,11 +1,11 @@
 {
-    "name": "atmfinder",
-    "short_name": "atmfinder",
+    "name": "台灣 ATM Finder",
+    "short_name": "ATM Finder",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#006C4C",
+    "theme_color": "#006C4C",
+    "description": "離線查詢全台 ATM 位置與已確認服務。",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

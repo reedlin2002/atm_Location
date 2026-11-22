@@ -73,7 +73,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get placeCategoryUnknown => '未知';
 
   @override
-  String get evidencePublisherFisc => '財金公司公開資料';
+  String get evidencePublisherFisc => '財金公司整理之政府開放資料';
 
   @override
   String get evidencePublisherMinistryOfDigitalAffairs => '數位發展部公開資料';
@@ -166,7 +166,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingSourcesTitle => '資料來源';
 
   @override
-  String get onboardingSourcesBody => 'ATM 主資料來自財金公司與其他具公開授權的政府或機構資料。';
+  String get onboardingSourcesBody =>
+      'ATM 資料來自中央銀行、數位發展部、中華郵政等政府開放資料，詳見設定中的「資料來源與授權」。';
 
   @override
   String get onboardingPrivacyTitle => '隱私說明';
@@ -436,6 +437,43 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get removeFilter => '移除此篩選';
+
+  @override
+  String get onboardingStart => '開始使用';
+
+  @override
+  String get loadingTagline => '離線查詢全台 ATM';
+
+  @override
+  String get loadingCatalog => '正在載入 ATM 資料…';
+
+  @override
+  String get loadingSourceNote => '資料來源：政府資料開放平臺';
+
+  @override
+  String get dataSourcesTitle => '資料來源與授權';
+
+  @override
+  String get dataSourcesSubtitle => '政府開放資料與授權條款';
+
+  @override
+  String dataSourcesDatasetVersion(String version) {
+    return '資料版本 $version';
+  }
+
+  @override
+  String get dataSourcesNotOfficial =>
+      '本 App 非任何銀行、金融機構或政府機關之官方 App。ATM 資料來自政府開放資料，可能有延遲或錯誤；位置、營業時間與服務請以現場及銀行公告為準。';
+
+  @override
+  String get dataSourcesListTitle => '資料來源';
+
+  @override
+  String get dataSourcesLicenseStatement =>
+      '此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。';
+
+  @override
+  String get dataSourcesLicenseLink => '政府資料開放授權條款：https://data.gov.tw/license';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -507,7 +545,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get placeCategoryUnknown => '未知';
 
   @override
-  String get evidencePublisherFisc => '財金公司公開資料';
+  String get evidencePublisherFisc => '財金公司整理之政府開放資料';
 
   @override
   String get evidencePublisherMinistryOfDigitalAffairs => '數位發展部公開資料';
@@ -600,7 +638,8 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get onboardingSourcesTitle => '資料來源';
 
   @override
-  String get onboardingSourcesBody => 'ATM 主資料來自財金公司與其他具公開授權的政府或機構資料。';
+  String get onboardingSourcesBody =>
+      'ATM 資料來自中央銀行、數位發展部、中華郵政等政府開放資料，詳見設定中的「資料來源與授權」。';
 
   @override
   String get onboardingPrivacyTitle => '隱私說明';
@@ -870,4 +909,41 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get removeFilter => '移除此篩選';
+
+  @override
+  String get onboardingStart => '開始使用';
+
+  @override
+  String get loadingTagline => '離線查詢全台 ATM';
+
+  @override
+  String get loadingCatalog => '正在載入 ATM 資料…';
+
+  @override
+  String get loadingSourceNote => '資料來源：政府資料開放平臺';
+
+  @override
+  String get dataSourcesTitle => '資料來源與授權';
+
+  @override
+  String get dataSourcesSubtitle => '政府開放資料與授權條款';
+
+  @override
+  String dataSourcesDatasetVersion(String version) {
+    return '資料版本 $version';
+  }
+
+  @override
+  String get dataSourcesNotOfficial =>
+      '本 App 非任何銀行、金融機構或政府機關之官方 App。ATM 資料來自政府開放資料，可能有延遲或錯誤；位置、營業時間與服務請以現場及銀行公告為準。';
+
+  @override
+  String get dataSourcesListTitle => '資料來源';
+
+  @override
+  String get dataSourcesLicenseStatement =>
+      '此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。';
+
+  @override
+  String get dataSourcesLicenseLink => '政府資料開放授權條款：https://data.gov.tw/license';
 }

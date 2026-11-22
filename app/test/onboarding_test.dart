@@ -33,10 +33,11 @@ void main() {
     expect(find.text('定位用途'), findsOneWidget);
     expect(find.text('資料來源'), findsOneWidget);
     expect(find.text('隱私說明'), findsOneWidget);
-    expect(find.text('略過'), findsOneWidget);
+    expect(find.text('開始使用'), findsOneWidget);
     expect(location.requestCount, 0);
 
-    await tester.tap(find.text('略過'));
+    await tester.ensureVisible(find.text('開始使用'));
+    await tester.tap(find.text('開始使用'));
     await tester.pumpAndSettle();
 
     expect(find.text('附近 ATM'), findsOneWidget);
@@ -70,6 +71,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('歡迎使用台灣 ATM Finder'), findsOneWidget);
     expect(find.text('返回'), findsOneWidget);
+    await tester.ensureVisible(find.text('返回'));
     await tester.tap(find.text('返回'));
     await tester.pumpAndSettle();
 

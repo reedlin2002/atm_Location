@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:atmfinder/app_dependencies.dart';
 import 'package:atmfinder/catalog/atm_catalog.dart';
 import 'package:atmfinder/design/app_theme.dart';
+import 'package:atmfinder/design/brand_mark.dart';
 import 'package:atmfinder/detail/atm_detail_page.dart';
 import 'package:atmfinder/favorites/favorites_page.dart';
 import 'package:atmfinder/home/home_search.dart';
@@ -61,7 +62,19 @@ class NearbyMapPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.nearbyAtmsTitle),
+        titleSpacing: 16,
+        title: Row(
+          children: [
+            const BrandMark(size: 32),
+            const SizedBox(width: 12),
+            Flexible(
+              child: Text(
+                localizations.nearbyAtmsTitle,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: localizations.filtersTitle,

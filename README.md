@@ -47,6 +47,19 @@ Android 10/API 29、2 GB 裝置 gate：
   -FlutterCommand flutter
 ```
 
+## 更新 ATM 資料與品牌素材
+
+```powershell
+# 重新下載官方資料，產生 App 內建的 baseline_catalog.json
+.\scripts\update-baseline-catalog.ps1
+
+# 重新產生 App 圖示、Web 圖示與 Play 商店素材（需要 Pillow）
+python scripts/generate-brand-assets.py
+```
+
+更新資料後，依腳本印出的筆數修改 `app/test/bundled_catalog_test.dart`，並確認
+`app/lib/settings/data_sources.dart` 的資料年份。
+
 ## Release and credentials
 
 Production signing material, Google/Firebase configuration and support contact

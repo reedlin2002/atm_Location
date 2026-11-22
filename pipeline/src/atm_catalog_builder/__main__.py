@@ -8,6 +8,7 @@ from pathlib import Path
 from atm_catalog_builder import CatalogBuilder, CatalogRelease, SourceSnapshot
 from atm_catalog_builder.evidence import EvidenceSource
 from atm_catalog_builder.fisc import DownloadedResource, FiscNationalAtmAdapter
+from atm_catalog_builder.official import apply_official_overlays
 from atm_catalog_builder.publication import (
     CatalogPublicationWorkflow,
     FilesystemArtifactPublisher,
@@ -29,25 +30,48 @@ def main() -> None:
     parser.add_argument("--published-at", type=_parse_datetime, required=True)
     parser.add_argument("--artifact-base-url", required=True)
     parser.add_argument("--prior-catalog", type=Path)
+    parser.add_argument(
+        "--official-overlays",
+        action="store_true",
+        help=(
+            "Download the MODA, Chunghwa Post and FISC accessibility lists and "
+            "overlay their coordinates and capabilities (requires --source-format "
+            "fisc)"
+        ),
+    )
     publication_mode = parser.add_mutually_exclusive_group()
     publication_mode.add_argument("--dry-run", action="store_true")
     publication_mode.add_argument("--publish-directory", type=Path)
     parser.add_argument("--human-approved", action="store_true")
     arguments = parser.parse_args()
+    if arguments.official_overlays and arguments.source_format != "fisc":
+        parser.error("--official-overlays requires --source-format fisc")
 
     def build_release() -> CatalogRelease:
-        source: SourceSnapshot | EvidenceSource = (
-            FiscNationalAtmAdapter(downloader=_FileDownloader(arguments.source)).fetch(
+        raw_archive_directory = arguments.output.parent / "raw"
+        source: SourceSnapshot | EvidenceSource
+        if arguments.source_format == "fisc":
+            backbone = FiscNationalAtmAdapter(
+                downloader=_FileDownloader(arguments.source)
+            ).fetch(
                 source_date=arguments.source_date,
-                raw_archive_directory=arguments.output.parent / "raw",
+                raw_archive_directory=raw_archive_directory,
             )
-            if arguments.source_format == "fisc"
-            else SourceSnapshot(
+            source = (
+                apply_official_overlays(
+                    backbone=backbone,
+                    source_date=arguments.source_date,
+                    raw_archive_directory=raw_archive_directory,
+                )
+                if arguments.official_overlays
+                else backbone
+            )
+        else:
+            source = SourceSnapshot(
                 name=arguments.source_name,
                 source_date=arguments.source_date,
                 path=arguments.source,
             )
-        )
         return CatalogBuilder().publish(
             sources=[source],
             prior_catalog_path=arguments.prior_catalog,

@@ -385,3 +385,29 @@ class _UrlResponse:
 
     def __iter__(self) -> Iterator[bytes]:
         return iter(())
+
+
+def test_coordinate_outside_taiwan_is_quarantined_not_published(
+    tmp_path: Path,
+) -> None:
+    valid_content = MODA_FIXTURE.read_text(encoding="utf-8")
+    # 2026-11 官方資料曾出現南投據點的經度為 127.7（應約為 120.9）。
+    off_island_row = valid_content.splitlines()[1].replace(
+        "121.514100",
+        "127.705955",
+    )
+    downloaded = f"{valid_content.rstrip()}\n{off_island_row}\n".encode("cp950")
+
+    result = ModaAtmAdapter(
+        downloader=_StaticDownloader(
+            DownloadedResource(content=downloaded, content_type="text/csv")
+        )
+    ).fetch(
+        source_date=date(2025, 11, 3),
+        raw_archive_directory=tmp_path,
+    )
+
+    assert len(result.records) == 3
+    assert result.quarantined_rows == (
+        SourceRowQuarantine(row_number=5, reason="invalid_record"),
+    )
