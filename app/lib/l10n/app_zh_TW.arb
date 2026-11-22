@@ -53,7 +53,7 @@
   "placeCategoryPostOffice": "郵局",
   "placeCategoryOther": "其他場所",
   "placeCategoryUnknown": "未知",
-  "evidencePublisherFisc": "財金公司公開資料",
+  "evidencePublisherFisc": "財金公司整理之政府開放資料",
   "evidencePublisherMinistryOfDigitalAffairs": "數位發展部公開資料",
   "evidencePublisherChunghwaPost": "中華郵政公開資料",
   "evidencePublisherLicensedGeocoder": "已核准地址定位服務",
@@ -106,7 +106,7 @@
   "onboardingLocationTitle": "定位用途",
   "onboardingLocationBody": "只有你主動點選「找我附近」時，才會要求前景定位；也可以略過並手動搜尋。",
   "onboardingSourcesTitle": "資料來源",
-  "onboardingSourcesBody": "ATM 主資料來自財金公司與其他具公開授權的政府或機構資料。",
+  "onboardingSourcesBody": "ATM 資料來自中央銀行、數位發展部、中華郵政等政府開放資料，詳見設定中的「資料來源與授權」。",
   "onboardingPrivacyTitle": "隱私說明",
   "onboardingPrivacyBody": "離線搜尋不需要接受資料蒐集。當次位置只用來排序附近結果，不保存位置歷史。",
   "skip": "略過",
@@ -266,5 +266,23 @@
   "accessStatusTwentyFourHours": "24 小時",
   "bankRelationshipSame": "本行 ATM",
   "bankRelationshipCross": "跨行 ATM",
-  "removeFilter": "移除此篩選"
+  "removeFilter": "移除此篩選",
+  "onboardingStart": "開始使用",
+  "loadingTagline": "離線查詢全台 ATM",
+  "loadingCatalog": "正在載入 ATM 資料…",
+  "loadingSourceNote": "資料來源：政府資料開放平臺",
+  "dataSourcesTitle": "資料來源與授權",
+  "dataSourcesSubtitle": "政府開放資料與授權條款",
+  "dataSourcesDatasetVersion": "資料版本 {version}",
+  "@dataSourcesDatasetVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "dataSourcesNotOfficial": "本 App 非任何銀行、金融機構或政府機關之官方 App。ATM 資料來自政府開放資料，可能有延遲或錯誤；位置、營業時間與服務請以現場及銀行公告為準。",
+  "dataSourcesListTitle": "資料來源",
+  "dataSourcesLicenseStatement": "此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。",
+  "dataSourcesLicenseLink": "政府資料開放授權條款：https://data.gov.tw/license"
 }

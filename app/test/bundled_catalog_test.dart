@@ -45,8 +45,9 @@ void main() {
           FROM atm_sites
         ''').getSingle();
 
-        expect(counts.read<int>('total'), 27289);
-        expect(counts.read<int>('with_coordinates'), 19541);
+        // 更新內建資料時，以 scripts/update-baseline-catalog.ps1 印出的數字更新。
+        expect(counts.read<int>('total'), 27443);
+        expect(counts.read<int>('with_coordinates'), 19227);
         expect(counts.read<int>('out_of_bounds'), 0);
         expect(await catalog.searchOffline('臺灣銀行'), isNotEmpty);
         expect(

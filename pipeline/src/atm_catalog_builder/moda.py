@@ -361,11 +361,15 @@ def _coordinates(
 ) -> tuple[float, float, bool]:
     source_longitude = _coordinate_value(row, "座標經度")
     source_latitude = _coordinate_value(row, "座標緯度")
-    if -180 <= source_longitude <= 180 and -90 <= source_latitude <= 90:
+    if _is_in_taiwan(source_latitude, source_longitude):
         return source_latitude, source_longitude, False
-    if -90 <= source_longitude <= 90 and -180 <= source_latitude <= 180:
+    if _is_in_taiwan(source_longitude, source_latitude):
         return source_longitude, source_latitude, True
-    raise ModaSourceContractError("MODA 座標超出範圍")
+    raise ModaSourceContractError("MODA 座標超出台灣範圍")
+
+
+def _is_in_taiwan(latitude: float, longitude: float) -> bool:
+    return 20.0 <= latitude <= 27.0 and 118.0 <= longitude <= 123.0
 
 
 def _required(row: dict[str, str | None], field: str) -> str:

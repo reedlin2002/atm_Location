@@ -65,6 +65,7 @@ jobs:
           args=(
             --source A2_Location.csv
             --source-format fisc
+            --official-overlays
             --source-name fisc-national-atm
             --source-date "$SOURCE_DATE"
             --output build/staged

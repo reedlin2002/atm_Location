@@ -208,7 +208,7 @@ abstract class AppLocalizations {
   /// No description provided for @evidencePublisherFisc.
   ///
   /// In zh_TW, this message translates to:
-  /// **'財金公司公開資料'**
+  /// **'財金公司整理之政府開放資料'**
   String get evidencePublisherFisc;
 
   /// No description provided for @evidencePublisherMinistryOfDigitalAffairs.
@@ -382,7 +382,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingSourcesBody.
   ///
   /// In zh_TW, this message translates to:
-  /// **'ATM 主資料來自財金公司與其他具公開授權的政府或機構資料。'**
+  /// **'ATM 資料來自中央銀行、數位發展部、中華郵政等政府開放資料，詳見設定中的「資料來源與授權」。'**
   String get onboardingSourcesBody;
 
   /// No description provided for @onboardingPrivacyTitle.
@@ -875,6 +875,72 @@ abstract class AppLocalizations {
   /// In zh_TW, this message translates to:
   /// **'移除此篩選'**
   String get removeFilter;
+
+  /// No description provided for @onboardingStart.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'開始使用'**
+  String get onboardingStart;
+
+  /// No description provided for @loadingTagline.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'離線查詢全台 ATM'**
+  String get loadingTagline;
+
+  /// No description provided for @loadingCatalog.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'正在載入 ATM 資料…'**
+  String get loadingCatalog;
+
+  /// No description provided for @loadingSourceNote.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'資料來源：政府資料開放平臺'**
+  String get loadingSourceNote;
+
+  /// No description provided for @dataSourcesTitle.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'資料來源與授權'**
+  String get dataSourcesTitle;
+
+  /// No description provided for @dataSourcesSubtitle.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'政府開放資料與授權條款'**
+  String get dataSourcesSubtitle;
+
+  /// No description provided for @dataSourcesDatasetVersion.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'資料版本 {version}'**
+  String dataSourcesDatasetVersion(String version);
+
+  /// No description provided for @dataSourcesNotOfficial.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'本 App 非任何銀行、金融機構或政府機關之官方 App。ATM 資料來自政府開放資料，可能有延遲或錯誤；位置、營業時間與服務請以現場及銀行公告為準。'**
+  String get dataSourcesNotOfficial;
+
+  /// No description provided for @dataSourcesListTitle.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'資料來源'**
+  String get dataSourcesListTitle;
+
+  /// No description provided for @dataSourcesLicenseStatement.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。'**
+  String get dataSourcesLicenseStatement;
+
+  /// No description provided for @dataSourcesLicenseLink.
+  ///
+  /// In zh_TW, this message translates to:
+  /// **'政府資料開放授權條款：https://data.gov.tw/license'**
+  String get dataSourcesLicenseLink;
 }
 
 class _AppLocalizationsDelegate

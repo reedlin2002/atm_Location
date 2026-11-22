@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
-        android:label="台灣 ATM Finder"
+        android:label="ATM Finder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <!-- Inject a package/SHA-restricted key at build time. A blank value

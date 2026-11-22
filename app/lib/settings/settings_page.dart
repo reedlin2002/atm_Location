@@ -4,6 +4,7 @@ import 'package:atmfinder/favorites/favorites_page.dart';
 import 'package:atmfinder/l10n/app_localizations.dart';
 import 'package:atmfinder/onboarding/onboarding_page.dart';
 import 'package:atmfinder/search/recent_places.dart';
+import 'package:atmfinder/settings/data_sources.dart';
 import 'package:atmfinder/settings/filter_page.dart';
 import 'package:atmfinder/settings/user_settings.dart';
 import 'package:flutter/material.dart';
@@ -136,6 +137,15 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   onFinished: () async => Navigator.of(routeContext).pop(),
                 ),
               ),
+            ),
+          ),
+          ListTile(
+            key: const ValueKey('open-data-sources'),
+            leading: const Icon(Icons.description_outlined),
+            title: Text(localizations.dataSourcesTitle),
+            subtitle: Text(localizations.dataSourcesSubtitle),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const DataSourcesPage()),
             ),
           ),
           ListTile(
