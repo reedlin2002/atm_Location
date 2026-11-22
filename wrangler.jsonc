@@ -1,0 +1,9 @@
+{
+  // Cloudflare：把 site/ 當成純靜態網站發佈（隱私權政策與服務條款）。
+  // 專案名稱要與 Cloudflare 上建立的 Worker 名稱一致。
+  "name": "atm-location",
+  "compatibility_date": "2026-11-22",
+  "assets": {
+    "directory": "./site"
+  }
+}
